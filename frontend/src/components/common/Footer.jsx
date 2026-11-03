@@ -8,27 +8,19 @@ import {
   X,
   Instagram,
   Linkedin,
-  Facebook,
   Globe,
-  Home,
   Heart,
 } from "lucide-react";
 export default function Footer() {
   const [hovered, setHovered] = useState({
-    x: false,
     instagram: false,
     linkedin: false,
+    whatsapp: false,
     iiit: false,
     website: false,
   });
 
   const socialLinks = [
-    {
-      name: "X",
-      url: "https://x.com/NSSIIITH",
-      color: "#1e40af",
-      key: "x",
-    },
     {
       name: "Instagram",
       url: "https://www.instagram.com/nss_iiith/",
@@ -50,24 +42,20 @@ export default function Footer() {
   ];
 
   const IconMap = {
-    x: X,
     instagram: Instagram,
     linkedin: Linkedin,
-    // facebook: Facebook,
-    whatsapp: Heart,
+    whatsapp: MessageCircle,
   };
 
   const quickLinks = [
     { name: "Home", href: "/" },
     { name: "Events", href: "/events" },
-    { name: "Gallery", href: "/" },
     { name: "Members", href: "/members" },
-    { name: "About", href: "/about" },
     { name: "Privacy Policy", href: "https://www.iiit.ac.in/privacy-policy/" },
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-blue-50 via-white to-orange-50 border-t-4 border-blue-800 relative overflow-hidden">
+    <footer id="footer" className="bg-gradient-to-br from-blue-50 via-white to-orange-50 border-t-4 border-blue-800 relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -240,7 +228,7 @@ export default function Footer() {
         <div className="border-t border-blue-800 pt-4 mt-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
             <p className="text-xs text-gray-600 m-0">
-              © 2025 IIIT Hyderabad. All rights reserved.
+              © {new Date().getFullYear()} IIIT Hyderabad. All rights reserved.
             </p>
             <p className="text-sm font-medium text-gray-700 m-0 flex items-center gap-1">
               Made with

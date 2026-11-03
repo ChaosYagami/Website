@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@apollo/client": "^3.8.0",
+    "boring-avatars": "^2.0.0",
     "cookies-next": "^2.1.0",
     "graphql": "^16.7.1",
     "lucide-react": "^0.544.0",
