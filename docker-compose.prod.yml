@@ -26,6 +26,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: unless-stopped
+    env_file:
+      - .env.production
     environment:
       MONGODB_URL: mongodb://admin:password123@mongodb:27017/nss_db?authSource=admin
       API_ENV: production
@@ -33,7 +35,7 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - ./backend:/app
+      - files_data:/app/uploads
     networks:
       - app-network
     deploy:
@@ -47,11 +49,16 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        # NEXT_PUBLIC_* vars are inlined into the JS bundle at build time,
+        # so this must be passed as a build arg, not just a runtime env var.
+        # Since we are using Nginx to route /api, the browser sees relative paths.
+        NEXT_PUBLIC_API_URL: /api
     restart: unless-stopped
+    env_file:
+      - .env.production
     environment:
       NODE_ENV: production
-      # Since we are using Nginx to route /api, the browser sees relative paths
-      NEXT_PUBLIC_API_URL: /api
     depends_on:
       - backend-1
     networks:
@@ -81,6 +88,7 @@ services:
 
 volumes:
   mongodb_data:
+  files_data:
 
 networks:
   app-network:
